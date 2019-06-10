@@ -13,7 +13,7 @@ store.on("error", function (err) {
 
 export default class Session {
     express = expressSession({
-        secret: "you should change this", //CHANGE ME!!!!
+        secret: "th1s is 0ur s3cr3t",
         cookie: {
             maxAge: 1000 * 60 * 60 * 24 * 7 * 52 * 2,
         },

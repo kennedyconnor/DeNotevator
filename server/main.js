@@ -43,6 +43,8 @@ server.use('/auth', new AuthController().router)
 import BoardController from './controllers/BoardController'
 server.use('/api/boards', new BoardController().router)
 
+import ListController from "./controllers/ListController"
+server.use('/api/boards/:id/lits', new ListController().router)
 
 
 //Default Error Handler
