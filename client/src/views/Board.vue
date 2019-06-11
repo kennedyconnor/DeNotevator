@@ -1,16 +1,30 @@
 <template>
   <div class="board">
     {{board.title}}
-    <!-- <list v-for="list in lists" :listData='list'></list> -->
-    <lists />
+    <div>
+      <form @submit="addList">
+        <input type="text" v-model="title" placeholder="Enter list name here">
+        <button type="submit">enter your shizzle</button>
+      </form>
+    </div>
+    <list v-for="list in lists" :key="list._id" :listData="list" />
   </div>
 </template>
 
 <script>
-  import Lists from "@/components/Lists.vue"
+  import List from "@/components/List.vue"
 
   export default {
     name: "board",
+    props: ["boardId"],
+    mounted() {
+      this.$store.dispatch('getLists', this.boardId)
+    },
+    data() {
+      return {
+        title: ""
+      }
+    },
     computed: {
       board() {
         return (
@@ -18,14 +32,24 @@
             title: "Loading..."
           }
         );
+      },
+      lists() {
+        return this.$store.state.lists
       }
     },
     components: {
-      Lists
+      List
     },
-    mounted() {
-      this.$store.dispatch('getLists', this.boardId)
-    },
-    props: ["boardId"]
+    methods: {
+      addList() {
+        let newList = {
+          title: this.title,
+          boardId: this.boardId,
+          authorId: this.board.authorId
+        }
+        this.$store.dispatch('addList', newList)
+        this.title = ''
+      }
+    }
   };
 </script>
