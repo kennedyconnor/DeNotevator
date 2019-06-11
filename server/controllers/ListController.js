@@ -1,9 +1,11 @@
 import ListService from "../services/ListService"
+import TaskService from '../services/TaskService'
 import express from 'express'
 import { Authorize } from "../middlewear/authorize"
 
 let _service = new ListService()
-let _repo = _service.repository
+let _listRepo = _service.repository
+let _taskRepo = new TaskService().repository
 
 
 //PUBLIC 
@@ -11,12 +13,11 @@ let _repo = _service.repository
 export default class ListController {
   constructor() {
     this.router = express.Router()
-      .get('/lists', this.getAllLists)
-      .get('', this.getListById)
+      .get('/:id/tasks', this.getListTasks)
       .use(Authorize.authenticated)
       .post('', this.createList)
-      .put('/', this.editList)
-      .delete('', this.deleteList)
+      .put('/:id', this.editList)
+      .delete('/:id', this.deleteList)
       .use(this.defaultRoute)
   }
 
@@ -24,33 +25,24 @@ export default class ListController {
     next({ status: 404, message: 'No Such Route' })
   }
 
-  async getAllLists(req, res, next) {
+  async getListTasks(req, res, next) {
     try {
-      //only gets lists by user who is logged in
-      let data = await _repo.find({ boardId: req.params.id, authorId: req.session.uid })
+      let data = await _taskRepo.find({ listId: req.params.id, authorId: req.session.uid })
       return res.send(data)
-    }
-    catch (err) { next(err) }
-  }
-
-  async getListById(req, res, next) {
-    try {
-      let data = await _repo.findOne({ _id: req.params.id, authorId: req.session.uid })
-      return res.send(data)
-    } catch (error) { next(error) }
+    } catch (error) { console.error(error) }
   }
 
   async createList(req, res, next) {
     try {
       req.body.authorId = req.session.uid
-      let data = await _repo.create(req.body)
+      let data = await _listRepo.create(req.body)
       return res.status(201).send(data)
     } catch (error) { next(error) }
   }
 
   async editList(req, res, next) {
     try {
-      let data = await _repo.findOneAndUpdate({ _id: req.params.id, authorId: req.session.uid }, req.body, { new: true })
+      let data = await _listRepo.findOneAndUpdate({ _id: req.params.id, authorId: req.session.uid }, req.body, { new: true })
       if (data) {
         return res.send(data)
       }
@@ -60,7 +52,7 @@ export default class ListController {
 
   async deleteList(req, res, next) {
     try {
-      await _repo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+      await _listRepo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
       return res.send("Successfully deleted")
     } catch (error) { next(error) }
   }
