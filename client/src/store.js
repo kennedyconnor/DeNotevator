@@ -27,7 +27,7 @@ export default new Vuex.Store({
     activeBoard: {},
     lists: [],
     activeList: {},
-    tasks: [],
+    tasks: {},
     activeTask: {},
     comments: []
   },
@@ -48,7 +48,7 @@ export default new Vuex.Store({
       state.activeList = activeList
     },
     setTasks(state, tasks) {
-      state.tasks = tasks
+      Vue.set(state.tasks, tasks.listId, tasks.results)
     },
     setActiveTask(state, activeTask) {
       state.activeTask = activeTask
@@ -140,8 +140,7 @@ export default new Vuex.Store({
     async getTasks({ commit, dispatch }, listId) {
       try {
         let res = await api.get('lists/' + listId + '/tasks')
-        console.log('getting tasks', res.data)
-        commit('setTasks', res.data)
+        commit('setTasks', { listId: listId, results: res.data })
       } catch (error) {
         console.error(error)
       }
