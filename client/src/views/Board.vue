@@ -4,7 +4,7 @@
     <div>
       <form @submit="addList">
         <input type="text" v-model="title" placeholder="Enter list name here">
-        <button type="submit">enter your shizzle</button>
+        <button type="submit">enter your list</button>
       </form>
     </div>
     <list v-for="list in lists" :key="list._id" :listData="list" />
