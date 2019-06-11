@@ -24,7 +24,12 @@ export default new Vuex.Store({
   state: {
     user: {},
     boards: [],
-    activeBoard: {}
+    activeBoard: {},
+    lists: [],
+    activeList: {},
+    tasks: [],
+    activeTask: {},
+    comments: []
   },
   mutations: {
     setUser(state, user) {
@@ -32,6 +37,24 @@ export default new Vuex.Store({
     },
     setBoards(state, boards) {
       state.boards = boards
+    },
+    setActiveBoard(state, activeBoard) {
+      state.activeBoard = activeBoard
+    },
+    setLists(state, lists) {
+      state.lists = lists
+    },
+    setActiveList(state, activeList) {
+      state.activeList = activeList
+    },
+    setTasks(state, tasks) {
+      state.tasks = tasks
+    },
+    setActiveTask(state, activeTask) {
+      state.activeTask = activeTask
+    },
+    setComments(state, comments) {
+      state.comments = comments
     }
   },
   actions: {
@@ -67,9 +90,18 @@ export default new Vuex.Store({
     getBoards({ commit, dispatch }) {
       api.get('boards')
         .then(res => {
+          console.log('Getting all boards', res.data)
           commit('setBoards', res.data)
         })
     },
+    async getBoardById({ commit, dispatch }, boardId) {
+      try {
+        let res = await api.get('boards/' + boardId)
+        console.log('Getting board by ID', res.data)
+        commit('setActiveBoard', res.data)
+      } catch (error) { console.error(error) }
+    },
+
     addBoard({ commit, dispatch }, boardData) {
       api.post('boards', boardData)
         .then(serverBoard => {
@@ -81,12 +113,18 @@ export default new Vuex.Store({
         .then(res => {
           dispatch('getBoards')
         })
-    }
+    },
     //#endregion
 
 
     //#region -- LISTS --
-
+    async getLists({ commit, dispatch }, boardId) {
+      try {
+        let res = await api.get('boards/' + boardId + '/lists')
+        console.log('Getting board lists', res.data)
+        commit('setLists', res.data)
+      } catch (error) { console.error(error) }
+    },
 
 
     //#endregion
