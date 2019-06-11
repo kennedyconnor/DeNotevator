@@ -18,15 +18,15 @@ let _schema = new Schema({
 }, { timestamps: true })
 
 //PUBLIC
-_schema.pre('remove', function (next) {
-  //lets find all the lists and remove them
-  this._id //THIS IS THE BOARD
-  Promise.all([
-    //TaskService.deleteMany({ listId: this._id }),
-  ])
-    .then(() => next())
-    .catch(err => next(err))
-})
+// _schema.pre('remove', function (next) {
+//   //lets find all the lists and remove them
+//   this._id //THIS IS THE TASK
+//   Promise.all([
+//     //TaskService.deleteMany({ taskId: this._id }),
+//   ])
+//     .then(() => next())
+//     .catch(err => next(err))
+// })
 export default class TaskService {
   get repository() {
     return mongoose.model('Task', _schema)
