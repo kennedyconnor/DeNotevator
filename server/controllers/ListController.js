@@ -1,19 +1,22 @@
-import ListService from "../services/ListService.js"
+import ListService from "../services/ListService"
 import express from 'express'
-import { Authorize } from "../middlewear/authorize.js"
+import { Authorize } from "../middlewear/authorize"
 
 let _service = new ListService()
-let _repo = new _service.repository
+let _repo = _service.repository
+
+
+//PUBLIC 
 
 export default class ListController {
   constructor() {
     this.router = express.Router()
-      .get('', this.getAllLists)
-      .get('/:id', this.getListById)
+      .get('/lists', this.getAllLists)
+      .get('', this.getListById)
       .use(Authorize.authenticated)
-      .post('/boards/:id', this.createList)
-      .put('/:id', this.editList)
-      .delete('/:id', this.deleteList)
+      .post('', this.createList)
+      .put('/', this.editList)
+      .delete('', this.deleteList)
       .use(this.defaultRoute)
   }
 
@@ -23,7 +26,7 @@ export default class ListController {
 
   async getAllLists(req, res, next) {
     try {
-      //only gets boards by user who is logged in
+      //only gets lists by user who is logged in
       let data = await _repo.find({ boardId: req.params.id, authorId: req.session.uid })
       return res.send(data)
     }

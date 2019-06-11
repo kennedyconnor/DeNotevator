@@ -16,7 +16,7 @@ export default class BoardsController {
       .post('', this.create)
       .put('/:id', this.edit)
       .delete('/:id', this.delete)
-      .use(this.defaultRoute)
+    // .use(this.defaultRoute)
   }
 
   defaultRoute(req, res, next) {
