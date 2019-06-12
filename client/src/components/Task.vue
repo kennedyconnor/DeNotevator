@@ -1,6 +1,13 @@
 <template>
   <div class="tasks">
     {{taskData.description}}
+    <br>
+    <form v-show="showForm" @submit.prevent="editTask">
+      <input type="text" placeholder="Edit Description" v-model="taskDescription">
+      <button type="submit">Submit Changes</button>
+    </form>
+    <button @click="showForm = !showForm">Edit Task</button>
+
     <button type="button" @click="deleteTask" class="btn btn-secondary">Delete Task</button>
     <p v-for="comment in taskData.comments">{{comment.content}}
       <button type="button" @click="deleteComment(comment._id)" class="btn btn-info">Delete Comment</button>
@@ -19,7 +26,9 @@
     props: ['taskData'],
     data() {
       return {
-        content: ""
+        content: "",
+        taskDescription: "",
+        showForm: false
       }
     },
     methods: {
@@ -38,6 +47,12 @@
       deleteComment(id) {
         this.taskData.comments = this.taskData.comments.filter(comment => comment._id !== id)
         this.$store.dispatch('editTask', this.taskData)
+      },
+      editTask() {
+        if (this.taskDescription) {
+          this.taskData.description = this.taskDescription
+          this.$store.dispatch('editTask', this.taskData)
+        }
       }
     },
     components: {}

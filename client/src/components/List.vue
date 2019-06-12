@@ -1,9 +1,16 @@
 <template>
   <div class="list">
+
     <div>
       {{listData.title}}
+      <form v-show="showForm" @submit.prevent="editList">
+        <input type="text" placeholder="Edit Title" v-model="listTitle">
+        <button type="submit">Submit Changes</button>
+      </form>
+      <button @click="showForm = !showForm">Edit List</button>
       <button type="button" @click="deleteList" class="btn btn-warning">Delete List</button>
     </div>
+
     <div>
       <task v-for="task in tasks" :key="task._id" :taskData="task" />
     </div>
@@ -29,6 +36,8 @@
     data() {
       return {
         description: "",
+        listTitle: "",
+        showForm: false
       }
     },
     computed: {
@@ -52,6 +61,13 @@
       },
       deleteList() {
         this.$store.dispatch('deleteList', this.listData)
+      },
+
+      editList() {
+        if (this.listTitle) {
+          this.listData.title = this.listTitle
+          this.$store.dispatch('editList', this.listData)
+        }
       }
     }
 
