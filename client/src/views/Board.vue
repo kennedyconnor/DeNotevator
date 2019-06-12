@@ -54,14 +54,14 @@
       List
     },
     methods: {
-      addList({ target: form }) {
+      addList() {
         let newList = {
           title: this.title,
           boardId: this.boardId,
           authorId: this.board.authorId
         }
         this.$store.dispatch('addList', newList)
-        form.reset()
+        this.title = ''
       },
 
       editBoard() {
@@ -76,7 +76,6 @@
         this.$store.dispatch('editBoard', boardEdits)
         this.boardTitle = ""
         this.boardDescription = ""
-        //form.reset()
       }
     }
   };

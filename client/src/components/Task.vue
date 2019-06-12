@@ -35,14 +35,14 @@
       deleteTask() {
         this.$store.dispatch('deleteTask', this.taskData)
       },
-      addComment({ target: form }) {
+      addComment() {
         let newComment = {
           content: this.content,
           authorId: this.taskData.authorId,
         }
         this.taskData.comments.push(newComment)
         this.$store.dispatch('editTask', this.taskData)
-        form.reset()
+        this.content = ''
       },
       deleteComment(id) {
         this.taskData.comments = this.taskData.comments.filter(comment => comment._id !== id)

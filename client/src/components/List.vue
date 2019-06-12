@@ -49,7 +49,7 @@
       Task
     },
     methods: {
-      addTask({ target: form }) {
+      addTask() {
         let newTask = {
           description: this.description,
           authorId: this.listData.authorId,
@@ -57,7 +57,7 @@
           listId: this.listData._id
         }
         this.$store.dispatch('addTask', newTask)
-        form.reset()
+        this.description = ''
       },
       deleteList() {
         this.$store.dispatch('deleteList', this.listData)
@@ -67,6 +67,7 @@
         if (this.listTitle) {
           this.listData.title = this.listTitle
           this.$store.dispatch('editList', this.listData)
+          this.listTitle = ''
         }
       }
     }
