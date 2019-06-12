@@ -2,6 +2,16 @@
   <div class="tasks">
     {{taskData.description}}
     <br>
+    <div class="dropdown">
+      <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+        Move Task
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <p class="dropdown-item" @click="changeList(list._id)" v-for="list in lists"
+          v-if="list._id !== taskData.listId">{{list.title}}</p>
+      </div>
+    </div>
+    <br>
     <form v-show="showForm" @submit.prevent="editTask">
       <input type="text" placeholder="Edit Description" v-model="taskDescription">
       <button type="submit" class="btn btn-success ml-1">Submit Changes</button>
@@ -55,8 +65,17 @@
           this.$store.dispatch('editTask', this.taskData)
           this.taskDescription = ""
         }
+      },
+      changeList(newListId) {
+        let oldListId = this.taskData.listId
+        this.taskData.listId = newListId
+        this.$store.dispatch('moveTask', { task: this.taskData, oldListId })
       }
     },
-    components: {}
+    computed: {
+      lists() {
+        return this.$store.state.lists
+      },
+    }
   }
 </script>

@@ -4,8 +4,8 @@
       <div class="col-4"></div>
       <div class="col-4">WELCOME TO THE BOARDS!!!</div>
       <div class="col-4">
-        <span>@{{this.$store.state.user.name}} </span>
-        <button class="btn  btn-primary" @click="userLogOut">Log Out</button>
+        <button class="btn btn-primary float-right" @click="userLogOut">Log Out</button>
+        <span class="float-right">@{{this.$store.state.user.name}} </span>
       </div>
 
     </div>
@@ -33,7 +33,6 @@
       }
     },
     mounted() {
-      //debugger
       this.$store.dispatch("getBoards");
     },
     data() {

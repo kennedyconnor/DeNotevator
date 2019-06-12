@@ -1,5 +1,8 @@
 <template>
   <div class="board">
+    <div>
+      <router-link to="/">Your Boards</router-link>
+    </div>
     {{board.title}}
     <br>
     {{board.description}}

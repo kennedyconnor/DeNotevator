@@ -176,10 +176,19 @@ export default new Vuex.Store({
         dispatch('getTasks', newTask.listId)
       } catch (error) { console.error(error) }
     },
-    async editTask({ commit, dispatch }, newTask) {
+    async editTask({ commit, dispatch }, payload) {
       try {
-        await api.put('tasks/' + newTask._id, newTask)
-        dispatch('getTasks', newTask.listId)
+        await api.put('tasks/' + payload._id, payload)
+        dispatch('getTasks', payload.listId)
+      } catch (error) { console.error(error) }
+    },
+    async moveTask({ commit, dispatch }, payload) {
+      try {
+        await api.put('tasks/' + payload.task._id, payload.task)
+        dispatch('getTasks', payload.task.listId)
+        if (payload.oldListId) {
+          dispatch('getTasks', payload.oldListId)
+        }
       } catch (error) { console.error(error) }
     },
     deleteTask({ commit, dispatch }, payload) {
@@ -188,16 +197,6 @@ export default new Vuex.Store({
           dispatch('getTasks', payload.listId)
         })
     },
-
-    //#endregion
-
-    //#region -- COMMENTS --
-    // async addComment({ commit, dispatch }, newComment) {
-    //   try {
-    //     await api.put('comment', newComment)
-    //     dispatch('getTasks', newTask.listId)
-    //   } catch (error) { console.error(error) }
-    // },
 
     //#endregion
   }
