@@ -52,6 +52,7 @@
         if (this.taskDescription) {
           this.taskData.description = this.taskDescription
           this.$store.dispatch('editTask', this.taskData)
+          this.taskDescription = ""
         }
       }
     },
