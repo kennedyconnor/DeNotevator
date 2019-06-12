@@ -41,14 +41,14 @@
       List
     },
     methods: {
-      addList() {
+      addList({ target: form }) {
         let newList = {
           title: this.title,
           boardId: this.boardId,
           authorId: this.board.authorId
         }
         this.$store.dispatch('addList', newList)
-        this.title = ''
+        form.reset()
       }
     }
   };
