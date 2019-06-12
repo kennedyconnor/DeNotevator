@@ -133,7 +133,12 @@ export default new Vuex.Store({
         dispatch('getLists', newList.boardId)
       } catch (error) { console.error(error) }
     },
-
+    deleteList({ commit, dispatch }, payload) {
+      api.delete('lists/' + payload._id)
+        .then(res => {
+          dispatch('getLists', payload.boardId)
+        })
+    },
 
 
     //#endregion
@@ -159,7 +164,12 @@ export default new Vuex.Store({
         dispatch('getTasks', newTask.listId)
       } catch (error) { console.error(error) }
     },
-
+    deleteTask({ commit, dispatch }, payload) {
+      api.delete('tasks/' + payload._id)
+        .then(res => {
+          dispatch('getTasks', payload.listId)
+        })
+    },
 
     //#endregion
 

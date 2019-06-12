@@ -1,7 +1,10 @@
 <template>
   <div class="tasks">
     {{taskData.description}}
-    <p v-for="comment in taskData.comments">{{comment.content}}</p>
+    <button type="button" @click="deleteTask" class="btn btn-secondary">Delete Task</button>
+    <p v-for="comment in taskData.comments">{{comment.content}}
+      <!-- <button type="button" @click="deleteComment" class="btn btn-info">Delete Comment</button> -->
+    </p>
     <br>
     <form @submit.prevent="addComment">
       <input type="text" v-model="content" placeholder="Enter new comment here">
@@ -20,16 +23,17 @@
       }
     },
     methods: {
-      addComment(event) {
+      addComment({ target: form }) {
         let newComment = {
           content: this.content,
           authorId: this.taskData.authorId,
         }
         this.taskData.comments.push(newComment)
         this.$store.dispatch('editTask', this.taskData)
-        // form.reset()
-        // this.content = ""
-        event.target.reset()
+        form.reset()
+      },
+      deleteTask() {
+        this.$store.dispatch('deleteTask', this.taskData)
       }
     },
     components: {}

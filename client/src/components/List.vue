@@ -2,6 +2,7 @@
   <div class="list">
     <div>
       {{listData.title}}
+      <button type="button" @click="deleteList" class="btn btn-warning">Delete List</button>
     </div>
     <div>
       <task v-for="task in tasks" :key="task._id" :taskData="task" />
@@ -48,6 +49,9 @@
         }
         this.$store.dispatch('addTask', newTask)
         form.reset()
+      },
+      deleteList() {
+        this.$store.dispatch('deleteList', this.listData)
       }
     }
 
