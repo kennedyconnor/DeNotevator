@@ -70,7 +70,9 @@ export default new Vuex.Store({
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'boards' })
+          if (router.currentRoute.name !== 'board') {
+            router.push({ name: 'boards' })
+          }
         })
         .catch(res => {
           router.push({ name: 'login' })
@@ -144,6 +146,12 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error)
       }
+    },
+    async addTask({ commit, dispatch }, newTask) {
+      try {
+        await api.post('tasks', newTask)
+        dispatch('getTasks', newTask.listId)
+      } catch (error) { console.error(error) }
     }
 
 

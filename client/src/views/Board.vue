@@ -19,6 +19,7 @@
     props: ["boardId"],
     mounted() {
       this.$store.dispatch('getLists', this.boardId)
+      this.$store.dispatch('getBoards', this.boardId)
     },
     data() {
       return {
