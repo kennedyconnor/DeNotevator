@@ -4,13 +4,14 @@
     <br>
     <form v-show="showForm" @submit.prevent="editTask">
       <input type="text" placeholder="Edit Description" v-model="taskDescription">
-      <button type="submit">Submit Changes</button>
+      <button type="submit" class="btn btn-success ml-1">Submit Changes</button>
     </form>
-    <button @click="showForm = !showForm">Edit Task</button>
+    <button @click="showForm = !showForm" v-if="showForm == false" class="btn btn-warning">Edit Task</button>
+    <button @click="showForm = !showForm" v-else="showForm == true" class="btn btn-warning">Cancel Edit</button>
 
-    <button type="button" @click="deleteTask" class="btn btn-secondary">Delete Task</button>
+    <button type="button" @click="deleteTask" class="btn btn-danger ml-1">Delete Task</button>
     <p v-for="comment in taskData.comments">{{comment.content}}
-      <button type="button" @click="deleteComment(comment._id)" class="btn btn-info">Delete Comment</button>
+      <button type="button" @click="deleteComment(comment._id)" class="btn btn-info ml-1">Delete Comment</button>
     </p>
     <br>
     <form @submit.prevent="addComment">

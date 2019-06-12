@@ -8,7 +8,8 @@
       <input type="text" placeholder="Edit Description" v-model="boardDescription">
       <button type="submit">Submit Changes</button>
     </form>
-    <button @click="showForm = !showForm">EDIT BOARD</button>
+    <button @click="showForm = !showForm" v-if="showForm == false">EDIT BOARD</button>
+    <button @click="showForm = !showForm" v-else="showForm == true">Cancel Edit</button>
 
     <div>
       <form @submit.prevent="addList">

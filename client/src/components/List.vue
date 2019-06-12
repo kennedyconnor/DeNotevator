@@ -5,10 +5,11 @@
       {{listData.title}}
       <form v-show="showForm" @submit.prevent="editList">
         <input type="text" placeholder="Edit Title" v-model="listTitle">
-        <button type="submit">Submit Changes</button>
+        <button type="submit" class="btn btn-success">Submit Changes</button>
       </form>
-      <button @click="showForm = !showForm">Edit List</button>
-      <button type="button" @click="deleteList" class="btn btn-warning">Delete List</button>
+      <button @click="showForm = !showForm" v-if="showForm == false" class="btn btn-warning">Edit List</button>
+      <button @click="showForm = !showForm" v-else="showForm == true" class="btn btn-warning">Cancel Edit</button>
+      <button type="button" @click="deleteList" class="btn btn-danger ml-1">Delete List</button>
     </div>
 
     <div>
@@ -17,7 +18,7 @@
     <div>
       <form @submit.prevent="addTask">
         <input type="text" v-model="description" placeholder="Enter task here">
-        <button type="submit">enter your task</button>
+        <button type="submit" class="btn btn-success">enter your task</button>
       </form>
     </div>
     <hr />
