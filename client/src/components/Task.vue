@@ -20,7 +20,7 @@
     <button @click="showForm = !showForm" v-else="showForm == true" class="btn btn-warning">Cancel Edit</button>
 
     <button type="button" @click="deleteTask" class="btn btn-danger ml-1">Delete Task</button>
-    <p v-for="comment in taskData.comments">{{comment.content}}
+    <p v-for="comment in taskData.comments">{{comment.content}} - {{comment.authorId.name}}
       <button type="button" @click="deleteComment(comment._id)" class="btn btn-info ml-1">Delete Comment</button>
     </p>
     <br>

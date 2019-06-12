@@ -27,7 +27,7 @@ export default class ListController {
 
   async getListTasks(req, res, next) {
     try {
-      let data = await _taskRepo.find({ listId: req.params.id, authorId: req.session.uid })
+      let data = await _taskRepo.find({ listId: req.params.id, authorId: req.session.uid }).populate('comments.authorId')
       return res.send(data)
     } catch (error) { console.error(error) }
   }
