@@ -1,6 +1,14 @@
 <template>
   <div class="boards">
-    WELCOME TO THE BOARDS!!!
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4">WELCOME TO THE BOARDS!!!</div>
+      <div class="col-4">
+        <span>@{{this.$store.state.user.name}} </span>
+        <button class="btn  btn-primary" @click="userLogOut">Log Out</button>
+      </div>
+
+    </div>
     <form @submit.prevent="addBoard">
       <input type="text" placeholder="title" v-model="newBoard.title" required>
       <input type="text" placeholder="description" v-model="newBoard.description">
@@ -49,6 +57,9 @@
       deleteBoard(boardId) {
         this.$store.dispatch("deleteBoard", boardId);
       },
+      userLogOut() {
+        this.$store.dispatch('logout')
+      }
     }
   };
 </script>
