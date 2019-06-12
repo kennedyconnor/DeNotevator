@@ -116,8 +116,14 @@ export default new Vuex.Store({
           dispatch('getBoards')
         })
     },
-    //#endregion
 
+    async editBoard({ commit, dispatch }, payload) {
+      try {
+        await api.put('boards/' + payload._id, payload)
+        dispatch('getBoards')
+      } catch (error) { console.error(error) }
+    },
+    //#endregion
 
     //#region -- LISTS --
     async getLists({ commit, dispatch }, boardId) {

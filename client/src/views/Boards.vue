@@ -9,7 +9,8 @@
     <div v-for="board in boards" :key="board._id">
       <router-link :to="{name: 'board', params: {boardId: board._id}}">{{board.title}}
       </router-link>
-      <button @click="deleteBoard(board._id)">DELETE BOARD</button>
+      <p>{{board.description}}</p>
+      <hr />
     </div>
   </div>
 </template>
@@ -32,7 +33,7 @@
         newBoard: {
           title: "",
           description: ""
-        }
+        },
       };
     },
     computed: {
@@ -48,11 +49,6 @@
       deleteBoard(boardId) {
         this.$store.dispatch("deleteBoard", boardId);
       },
-      // setActiveBoard(boardId) {
-      //   console.log('board set')
-      //   this.$store.dispatch("getBoardById", boardId)
-      // }
-
     }
   };
 </script>
