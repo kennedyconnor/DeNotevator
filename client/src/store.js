@@ -152,8 +152,24 @@ export default new Vuex.Store({
         await api.post('tasks', newTask)
         dispatch('getTasks', newTask.listId)
       } catch (error) { console.error(error) }
-    }
+    },
+    async editTask({ commit, dispatch }, newTask) {
+      try {
+        await api.put('tasks/' + newTask._id, newTask)
+        dispatch('getTasks', newTask.listId)
+      } catch (error) { console.error(error) }
+    },
 
+
+    //#endregion
+
+    //#region -- COMMENTS --
+    // async addComment({ commit, dispatch }, newComment) {
+    //   try {
+    //     await api.put('comment', newComment)
+    //     dispatch('getTasks', newTask.listId)
+    //   } catch (error) { console.error(error) }
+    // },
 
     //#endregion
   }

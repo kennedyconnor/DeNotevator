@@ -7,11 +7,12 @@
       <task v-for="task in tasks" :key="task._id" :taskData="task" />
     </div>
     <div>
-      <form @submit="addTask">
+      <form @submit.prevent="addTask">
         <input type="text" v-model="description" placeholder="Enter task here">
         <button type="submit">enter your task</button>
       </form>
     </div>
+    <hr />
   </div>
 </template>
 

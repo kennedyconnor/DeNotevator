@@ -2,7 +2,7 @@
   <div class="board">
     {{board.title}}
     <div>
-      <form @submit="addList">
+      <form @submit.prevent="addList">
         <input type="text" v-model="title" placeholder="Enter list name here">
         <button type="submit">enter your list</button>
       </form>
