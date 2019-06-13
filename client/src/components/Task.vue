@@ -1,5 +1,5 @@
 <template>
-  <drag :transfer-data="taskData" class="drag task">
+  <drag :transfer-data="taskData" :effect-allowed="['move']" drop-effect="move" class="drag task">
     {{taskData.description}}
     <br>
     <div class="dropdown">

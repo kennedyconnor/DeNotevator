@@ -24,11 +24,12 @@ export default new Vuex.Store({
   state: {
     user: {},
     boards: [],
-    activeBoard: {},
+    sharedBoards: [],
+    //activeBoard: {},
     lists: [],
-    activeList: {},
+    //activeList: {},
     tasks: {},
-    activeTask: {},
+    //activeTask: {},
     comments: []
   },
   mutations: {
@@ -38,21 +39,24 @@ export default new Vuex.Store({
     setBoards(state, boards) {
       state.boards = boards
     },
-    setActiveBoard(state, activeBoard) {
-      state.activeBoard = activeBoard
+    setSharedBoards(state, sharedBoards) {
+      state.boards = sharedBoards
     },
+    // setActiveBoard(state, activeBoard) {
+    //   state.activeBoard = activeBoard
+    // },
     setLists(state, lists) {
       state.lists = lists
     },
-    setActiveList(state, activeList) {
-      state.activeList = activeList
-    },
+    // setActiveList(state, activeList) {
+    //   state.activeList = activeList
+    // },
     setTasks(state, tasks) {
       Vue.set(state.tasks, tasks.listId, tasks.results)
     },
-    setActiveTask(state, activeTask) {
-      state.activeTask = activeTask
-    },
+    // setActiveTask(state, activeTask) {
+    //   state.activeTask = activeTask
+    // },
     setComments(state, comments) {
       state.comments = comments
     }

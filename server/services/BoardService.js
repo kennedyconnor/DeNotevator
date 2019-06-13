@@ -10,7 +10,8 @@ let _taskRepo = new TaskService().repository
 let _schema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  authorId: { type: ObjectId, ref: 'User', required: true }
+  authorId: { type: ObjectId, ref: 'User', required: true },
+  sharedIds: [Schema.Types.ObjectId]
 }, { timestamps: true })
 
 //CASCADE ON DELETE
