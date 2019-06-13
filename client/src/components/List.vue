@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <drop @drop="handleDrop" class="drop">
 
     <div>
       {{listData.title}}
@@ -12,9 +12,9 @@
       <button type="button" @click="deleteList" class="btn btn-danger ml-1">Delete List</button>
     </div>
 
-    <div>
-      <task v-for="task in tasks" :key="task._id" :taskData="task" />
-    </div>
+
+    <task v-for="task in tasks" :key="task._id" :taskData="task" />
+
     <div>
       <form @submit.prevent="addTask">
         <input type="text" v-model="description" placeholder="Enter task here">
@@ -22,11 +22,12 @@
       </form>
     </div>
     <hr />
-  </div>
+  </drop>
 </template>
 
 <script>
   import Task from '@/components/Task.vue'
+  import { Drag, Drop } from 'vue-drag-drop';
 
   export default {
     name: 'Lists',
@@ -47,7 +48,9 @@
       }
     },
     components: {
-      Task
+      Task,
+      Drag,
+      Drop
     },
     methods: {
       addTask() {
@@ -70,6 +73,12 @@
           this.$store.dispatch('editList', this.listData)
           this.listTitle = ''
         }
+      },
+      handleDrop(data) {
+        console.log("dropped transfer data:", (data))
+        let oldListId = data.listId
+        data.listId = this.listData._id
+        this.$store.dispatch('moveTask', { task: data, oldListId })
       }
     }
 
