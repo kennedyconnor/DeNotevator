@@ -1,7 +1,16 @@
 <template>
   <div class="board">
     <div>
-      <router-link to="/">Your Boards</router-link>
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+          <router-link to="/">Your Boards</router-link>
+        </div>
+        <div class="col-4">
+          <button class="btn btn-primary float-right" @click="userLogOut">Log Out</button>
+          <span class="float-right">@{{this.$store.state.user.name}} </span>
+        </div>
+      </div>
     </div>
     {{board.title}}
     <br>
@@ -80,6 +89,9 @@
         this.$store.dispatch('editBoard', boardEdits)
         this.boardTitle = ""
         this.boardDescription = ""
+      },
+      userLogOut() {
+        this.$store.dispatch('logout')
       }
     }
   };

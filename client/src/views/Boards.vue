@@ -2,12 +2,11 @@
   <div class="boards">
     <div class="row">
       <div class="col-4"></div>
-      <div class="col-4">WELCOME TO THE BOARDS!!!</div>
+      <div class="col-4"></div>
       <div class="col-4">
         <button class="btn btn-primary float-right" @click="userLogOut">Log Out</button>
         <span class="float-right">@{{this.$store.state.user.name}} </span>
       </div>
-
     </div>
     <form @submit.prevent="addBoard">
       <input type="text" placeholder="title" v-model="newBoard.title" required>
