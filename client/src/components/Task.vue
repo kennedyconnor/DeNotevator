@@ -1,5 +1,5 @@
 <template>
-  <div class="tasks">
+  <drag :transfer-data="taskData" class="drag task">
     {{taskData.description}}
     <br>
     <div class="dropdown">
@@ -28,10 +28,12 @@
       <input type="text" v-model="content" placeholder="Enter new comment here">
       <button type="submit">enter your comment</button>
     </form>
-  </div>
+  </drag>
 </template>
 
 <script>
+  import { Drag, Drop } from 'vue-drag-drop';
+
   export default {
     name: "Task",
     props: ['taskData'],
@@ -41,6 +43,10 @@
         taskDescription: "",
         showForm: false
       }
+    },
+    components: {
+      Drag,
+      Drop
     },
     methods: {
       deleteTask() {
