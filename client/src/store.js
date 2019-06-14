@@ -40,7 +40,7 @@ export default new Vuex.Store({
       state.boards = boards
     },
     setSharedBoards(state, sharedBoards) {
-      state.boards = sharedBoards
+      state.sharedBoards = sharedBoards
     },
     // setActiveBoard(state, activeBoard) {
     //   state.activeBoard = activeBoard
@@ -107,6 +107,14 @@ export default new Vuex.Store({
           commit('setBoards', res.data)
         })
     },
+    async getSharedBoards({ commit, dispatch }) {
+      try {
+        let res = await api.get('boards/shared')
+        console.log('getting shared boards', res.data)
+        commit('setSharedBoards', res.data)
+      } catch (error) { console.error(error) }
+    },
+    
     async getBoardById({ commit, dispatch }, boardId) {
       try {
         let res = await api.get('boards/' + boardId)
