@@ -33,6 +33,7 @@
     },
     mounted() {
       this.$store.dispatch("getBoards");
+      this.$store.dispatch("getSharedBoards")
     },
     data() {
       return {
@@ -45,6 +46,9 @@
     computed: {
       boards() {
         return this.$store.state.boards;
+      },
+      sharedBoards() {
+        return this.$store.state.sharedBoards
       }
     },
     methods: {

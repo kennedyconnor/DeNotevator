@@ -2,10 +2,12 @@ import ListService from "../services/ListService"
 import TaskService from '../services/TaskService'
 import express from 'express'
 import { Authorize } from "../middlewear/authorize"
+import BoardService from "../services/BoardService";
 
 let _service = new ListService()
 let _listRepo = _service.repository
 let _taskRepo = new TaskService().repository
+let _boardRepo = new BoardService().repository
 
 
 //PUBLIC 
@@ -27,8 +29,10 @@ export default class ListController {
 
   async getListTasks(req, res, next) {
     try {
-      let data = await _taskRepo.find({ listId: req.params.id, authorId: req.session.uid }).populate('comments.authorId')
-      return res.send(data)
+      if (await _boardRepo.find({ $or: [{ authorId: req.session.uid }, { sharedIds: { $in: [req.session.uid] } }] })) {
+        let data = await _taskRepo.find({ listId: req.params.id }).populate('comments.authorId')
+        return res.send(data)
+      }
     } catch (error) { console.error(error) }
   }
 
