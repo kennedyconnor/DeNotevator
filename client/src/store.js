@@ -95,6 +95,11 @@ export default new Vuex.Store({
       commit('setUser', {})
       router.push({ name: 'login' })
     },
+
+    async getUserByName({ commit, dispatch }, name) {
+      let res = await auth.get('', name)
+      return res.data
+    },
     //#endregion
 
 

@@ -42,21 +42,23 @@
     mounted() {
       this.$store.dispatch('getLists', this.boardId)
       this.$store.dispatch('getBoards', this.boardId)
+      this.$store.dispatch('getSharedBoards', this.boardId)
+
     },
     data() {
       return {
         title: "",
         showForm: false,
         boardTitle: "",
-        boardDescription: ""
+        boardDescription: "",
+        userName: ""
       }
     },
     computed: {
       board() {
         return (
-          this.$store.state.boards.find(b => b._id == this.boardId) || {
-            title: "Loading..."
-          }
+          this.$store.state.boards.find(b => b._id == this.boardId) || this.$store.state.sharedBoards.find(b => b._id == this.boardId) ||
+          { title: "Loading..." }
         );
       },
       lists() {
@@ -92,6 +94,15 @@
       },
       userLogOut() {
         this.$store.dispatch('logout')
+      },
+      addSharedUser() {
+        let sharedUser = this.$store.dispatch('getUserByName', this.userName)
+        let sharedBoard = {
+          _id: this.board._id,
+          sharedIds: this.board.sharedIds.push(sharedUser._id)
+        }
+        this.$store.dispatch('editBoard', sharedBoards)
+        this.userName = ""
       }
     }
   };
