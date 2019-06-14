@@ -37,7 +37,7 @@
             alt="Demotivator Image" class="image">
           <div class="middle">
             <div class="text">
-              <h5><b>{{board.title}}</b> <i class="fas fa-users"></i></h5>
+              <h5><b>{{board.title}}</b><i class="fas fa-users"></i></h5>
               <p>{{board.description}}</p>
               <button type="button" class="btn btn-sm btn-danger" @click="deleteBoard(board._id)">Delete</button>
             </div>
