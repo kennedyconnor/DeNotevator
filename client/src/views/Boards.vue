@@ -21,11 +21,10 @@
     </div>
     <div class="row">
       <div class="col">
-        <button type="button" class="btn btn-sm btn-dark mb-2" @click="showForm = !showForm"
-          v-if="showForm == false">Add
+        <button type="button" class="btn btn-sm btn-dark mb-2" @click="showForm = !showForm" v-if="!showForm">Add
           Board</button>
         <button type="button" class="btn btn-sm btn-warning mb-2" @click="showForm = !showForm"
-          v-else-if="showForm == true">Cancel</button>
+          v-else-if="showForm">Cancel</button>
       </div>
     </div>
 
@@ -64,7 +63,8 @@
           title: "",
           description: ""
         },
-        showForm: false
+        showForm: false,
+        // images: ['1.jpeg', '2.jpeg', '3.jpeg', '4.jpeg', '5.jpeg', '6.jpg', '7.jpeg', '8.jpg', '9.jpeg', '10.jpg', '11.jpeg', '12.jpeg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpeg', '19.jpg']
       };
     },
     created() {
@@ -93,7 +93,7 @@
         this.$router.push({ name: 'board', params: { boardId } })
       },
       getRandomImg() {
-        let images = ['1.jpeg', '2.jpeg', '3.jpeg', '4.jpeg', '5.jpeg', '6.jpg', '7.jpeg', '8.jpg', '9.jpeg', '10.jpg', '11.jpeg', '12.jpeg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpeg', '19.jpg',]
+        let images = ['1.jpeg', '2.jpeg', '3.jpeg', '4.jpeg', '5.jpeg', '6.jpg', '7.jpeg', '8.jpg', '9.jpeg', '10.jpg', '11.jpeg', '12.jpeg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpeg', '19.jpg']
         let randomNum = Math.floor(Math.random() * images.length)
         return 'images/' + images[randomNum]
       }

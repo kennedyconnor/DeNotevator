@@ -7,7 +7,7 @@
         <input type="text" placeholder="Edit Title" v-model="listTitle">
         <button type="submit" class="btn btn-success">Submit Changes</button>
       </form>
-      <button @click="showForm = !showForm" v-if="showForm == false" class="btn btn-warning">Edit List</button>
+      <button @click="showForm = !showForm" v-if="showForm == false" class="btn btn-warning">Edit List Name</button>
       <button @click="showForm = !showForm" v-else="showForm == true" class="btn btn-warning">Cancel Edit</button>
       <button type="button" @click="deleteList" class="btn btn-danger ml-1">Delete List</button>
     </div>

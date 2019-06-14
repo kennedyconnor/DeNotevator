@@ -103,6 +103,7 @@ export default new Vuex.Store({
       api.get('boards')
         .then(res => {
           console.log('Getting all boards', res.data)
+          // res.data.forEach(i => Math.floor(Math.random(i) * images.length))
           commit('setBoards', res.data)
         })
     },
