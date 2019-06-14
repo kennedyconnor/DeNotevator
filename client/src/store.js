@@ -107,7 +107,8 @@ export default new Vuex.Store({
     getBoards({ commit, dispatch }) {
       api.get('boards')
         .then(res => {
-          console.log('Getting your boards', res.data)
+          console.log('Getting all boards', res.data)
+          // res.data.forEach(i => Math.floor(Math.random(i) * images.length))
           commit('setBoards', res.data)
         })
     },
@@ -117,8 +118,8 @@ export default new Vuex.Store({
         console.log('getting shared boards', res.data)
         commit('setSharedBoards', res.data)
       } catch (error) { console.error(error) }
-
     },
+    
     async getBoardById({ commit, dispatch }, boardId) {
       try {
         let res = await api.get('boards/' + boardId)
