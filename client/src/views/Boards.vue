@@ -2,10 +2,12 @@
   <div class="container-fluid boards">
     <div class="row">
       <div class="col-4"></div>
-      <div class="col-4 brand"><b>deNotevator</b></div>
+      <div class="col-4">
+        <h1 class="brand">de<span class="brand-mid">Note</span>vator</h1>
+      </div>
       <div class="col-4">
         <button class="btn btn-sm btn-danger float-right mt-1" @click="userLogOut">Log Out</button>
-        <span class="float-right mr-1 mt-1">@{{this.$store.state.user.name}} </span>
+        <span class="float-right mr-2 mt-2 user-name">@{{this.$store.state.user.name}} </span>
       </div>
     </div>
     <div class="row" v-show="showForm">
@@ -103,7 +105,7 @@
     background-repeat: no-repeat;
     height: 100%;
     width: 100%;
-    font-family: 'Indie Flower', cursive;
+    font-family: 'Kalam', cursive;
   }
 
   .container-fluid {
@@ -112,6 +114,17 @@
 
   .brand {
     font-size: 4em;
+    font-family: 'Permanent Marker', cursive;
+  }
+
+  .brand-mid {
+    font-size: 1.3em;
+    font-family: 'Permanent Marker', cursive;
+  }
+
+  .user-name {
+    font-family: 'Kalam', cursive;
+    font-weight: bold
   }
 
   .card-columns {
