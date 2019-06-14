@@ -33,8 +33,7 @@
     <div class="row">
       <div class="card-columns">
         <div class="container" v-for="board in boards" :key="board._id" @click="openBoard(board._id)">
-          <img src="https://cdn.shopify.com/s/files/1/0535/6917/products/Ruthlessness.jpg?v=1476131976"
-            alt="Demotivator Image" class="image">
+          <img :src="getRandomImg()" alt="Demotivator Image" class="image">
           <div class="middle">
             <div class="text">
               <h5><b>{{board.title}}</b><i class="fas fa-users"></i></h5>
@@ -92,6 +91,11 @@
       },
       openBoard(boardId) {
         this.$router.push({ name: 'board', params: { boardId } })
+      },
+      getRandomImg() {
+        let images = ['1.jpeg', '2.jpeg', '3.jpeg', '4.jpeg', '5.jpeg', '6.jpg', '7.jpeg', '8.jpg', '9.jpeg', '10.jpg', '11.jpeg', '12.jpeg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpeg', '19.jpg',]
+        let randomNum = Math.floor(Math.random() * images.length)
+        return 'images/' + images[randomNum]
       }
     }
   };
@@ -103,6 +107,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    /* background-attachment: fixed; */
     height: 100%;
     width: 100%;
     font-family: 'Raleway', sans-serif;
