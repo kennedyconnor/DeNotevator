@@ -96,3 +96,9 @@
     }
   };
 </script>
+
+<style scoped>
+  .board {
+    font-family: 'Indie Flower', cursive;
+  }
+</style>

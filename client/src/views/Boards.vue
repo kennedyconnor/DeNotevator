@@ -95,7 +95,7 @@
   };
 </script>
 
-<style scope>
+<style>
   .boards {
     background-image: url('https://cdn.wallpapersafari.com/27/2/neKuYV.jpg');
     background-size: cover;
@@ -103,6 +103,7 @@
     background-repeat: no-repeat;
     height: 100%;
     width: 100%;
+    font-family: 'Indie Flower', cursive;
   }
 
   .container-fluid {

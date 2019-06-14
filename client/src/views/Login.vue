@@ -21,7 +21,7 @@
               <button type="submit" class="btn btn-success mt-1">Create Account</button>
             </form>
             <div class="action mr-2" @click="loginForm = !loginForm">
-              <p v-if="loginForm">No account? Click here to Register</p>
+              <p v-if="loginForm" class="mt-2">No account? Click here to Register</p>
               <p v-else>Already have an account? Click here to Login</p>
             </div>
           </div>
@@ -60,7 +60,7 @@
   };
 </script>
 
-<style scope>
+<style>
   .action {
     cursor: pointer;
   }
