@@ -36,6 +36,16 @@
           <img :src="getRandomImg()" alt="Demotivator Image" class="image">
           <div class="middle">
             <div class="text">
+              <h5><b>{{board.title}}</b></h5>
+              <p>{{board.description}}</p>
+              <button type="button" class="btn btn-sm btn-danger" @click="deleteBoard(board._id)">Delete</button>
+            </div>
+          </div>
+        </div>
+        <div class="container" v-for="board in sharedBoards" :key="board._id" @click="openBoard(board._id)">
+          <img :src="getRandomImg()" alt="Demotivator Image" class="image">
+          <div class="middle">
+            <div class="text">
               <h5><b>{{board.title}}</b><i class="fas fa-users"></i></h5>
               <p>{{board.description}}</p>
               <button type="button" class="btn btn-sm btn-danger" @click="deleteBoard(board._id)">Delete</button>

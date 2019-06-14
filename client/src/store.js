@@ -40,7 +40,7 @@ export default new Vuex.Store({
       state.boards = boards
     },
     setSharedBoards(state, sharedBoards) {
-      state.boards = sharedBoards
+      state.sharedBoards = sharedBoards
     },
     // setActiveBoard(state, activeBoard) {
     //   state.activeBoard = activeBoard
