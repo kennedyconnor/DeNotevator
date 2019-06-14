@@ -14,6 +14,7 @@ export default class BoardsController {
   constructor() {
     this.router = express.Router()
       .get('', this.getAll)
+      .get('/shared', this.getSharedBoards)
       .get('/:id', this.getById)
       .get('/:id/lists', this.getBoardLists)
       .use(Authorize.authenticated)
@@ -36,6 +37,15 @@ export default class BoardsController {
     catch (err) { next(err) }
   }
 
+  async getSharedBoards(req, res, next) {
+    try {
+      //only gets boards if user who is logged in matches a shared Id
+      let data = await _boardRepo.find({ sharedIds: { $in: [req.session.uid] } })
+      return res.send(data)
+    }
+    catch (err) { next(err) }
+  }
+
   async getById(req, res, next) {
     try {
       let data = await _boardRepo.findOne({ _id: req.params.id, authorId: req.session.uid })
@@ -44,8 +54,11 @@ export default class BoardsController {
   }
   async getBoardLists(req, res, next) {
     try {
-      console.log(req.params.id)
-      let data = await _listRepo.find({ boardId: req.params.id, authorId: req.session.uid })
+      //get Lists for boards were 
+      let data = await _listRepo.find({
+        boardId: req.params.id,
+        // $or: [{ authorId: req.session.uid }, { sharedIds: { $in: [req.session.uid] } }]
+      })
       return res.send(data)
     }
     catch (err) { next(err) }

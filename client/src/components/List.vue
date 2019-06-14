@@ -75,7 +75,6 @@
         }
       },
       handleDrop(data) {
-        console.log("dropped transfer data:", (data))
         let oldListId = data.listId
         data.listId = this.listData._id
         this.$store.dispatch('moveTask', { task: data, oldListId })
