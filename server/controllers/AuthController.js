@@ -13,6 +13,7 @@ export default class AuthController {
             .post('/login', this.login)
             .use(Authorize.authenticated)
             .get('/authenticate', this.authenticate)
+            .get('/:id', this.getUserByName)
             .delete('/logout', this.logout)
             .use(this.defaultRoute)
     }
@@ -79,6 +80,15 @@ export default class AuthController {
         catch (err) {
             console.error(err)
             res.status(500).send(err)
+        }
+    }
+
+    async getUserByName(req, res, next) {
+        try {
+            let user = await _repo.find({ name: req.params.id })
+            return res.send(user)
+        } catch (error) {
+            console.error(error)
         }
     }
 

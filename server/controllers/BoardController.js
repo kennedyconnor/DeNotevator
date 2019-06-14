@@ -3,6 +3,7 @@ import ListService from '../services/ListService'
 import express from 'express'
 import { Authorize } from '../middlewear/authorize'
 
+
 //import service and create an instance
 let _service = new BoardService()
 let _boardRepo = _service.repository
@@ -28,7 +29,7 @@ export default class BoardsController {
     next({ status: 404, message: 'No Such Route' })
   }
 
-  async getAll(req, res, next) {
+  async getAll(req, res, next) { //get YOUR boards
     try {
       //only gets boards by user who is logged in
       let data = await _boardRepo.find({ authorId: req.session.uid })
@@ -37,7 +38,7 @@ export default class BoardsController {
     catch (err) { next(err) }
   }
 
-  async getSharedBoards(req, res, next) {
+  async getSharedBoards(req, res, next) { //get boards SHARED with you
     try {
       //only gets boards if user who is logged in matches a shared Id
       let data = await _boardRepo.find({ sharedIds: { $in: [req.session.uid] } })
@@ -54,12 +55,14 @@ export default class BoardsController {
   }
   async getBoardLists(req, res, next) {
     try {
-      //get Lists for boards were 
-      let data = await _listRepo.find({
-        boardId: req.params.id,
-        // $or: [{ authorId: req.session.uid }, { sharedIds: { $in: [req.session.uid] } }]
-      })
-      return res.send(data)
+      if (await _boardRepo.find({ $or: [{ authorId: req.session.uid }, { sharedIds: { $in: [req.session.uid] } }] })) {
+        //get Lists for boards were 
+        let data = await _listRepo.find({
+          boardId: req.params.id,
+          // $or: [{ authorId: req.session.uid }, { sharedIds: { $in: [req.session.uid] } }]
+        })
+        return res.send(data)
+      }
     }
     catch (err) { next(err) }
   }
