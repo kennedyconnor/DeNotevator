@@ -16,5 +16,6 @@
     padding: 0px 0px;
     height: 100vh;
     width: 100vw;
+    user-select: none;
   }
 </style>
