@@ -8,18 +8,17 @@
         <router-link to="/"><a class="float-left ml-3 mt-1 text-dark boards-link"><b>Boards Home</b></a>
         </router-link>
       </div>
-      <div class="col-2 offset-md-">
+      <div class="col-2">
         <span class="user-name mr-2">@{{this.$store.state.user.name}}</span>
         <button class="btn btn-danger btn-sm mt-1" @click="userLogOut">Log Out</button>
-
       </div>
     </div>
 
     <div class="row">
-      <div class="col-10">
+      <div class="col-10 offset-md-1">
         <h1 class="board-title">{{board.title}}</h1>
       </div>
-      <div class="col-2 float-right">
+      <div class="col-1 float-right">
         <i class="fas fa-user-plus mt-4" @click="showAddCollabForm = !showAddCollabForm" v-if="!showAddCollabForm"></i>
       </div>
     </div>
@@ -38,20 +37,24 @@
     </div>
 
     <div class="row">
-      <div class="col-12">
+      <div class="col-10 offset-md-1">
         <h4 class="board-desc">{{board.description}}</h4>
+      </div>
+      <div class="col-1">
+        <i class="fas fa-user-edit" @click="showForm = !showForm" v-if="!showForm"></i>
       </div>
     </div>
 
     <div class="row">
-      <div class="col">
+      <div class="col-12">
         <form v-show="showForm" @submit.prevent="editBoard">
           <input type="text" placeholder="Edit Board Title" v-model="boardTitle" class="text-center">
           <input type="text" placeholder="Edit Board Description" v-model="boardDescription" class="text-center ml-1">
           <button class="btn btn-success ml-1 mb-1" type="submit">Submit Changes</button>
         </form>
-        <button class="btn btn-light" @click="showForm = !showForm" v-if="!showForm">Edit Board Details</button>
-        <button class="btn btn-secondary" @click="showForm = !showForm" v-else="showForm">Cancel Edit</button>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-secondary" @click="showForm = !showForm" v-if="showForm">Cancel Edit</button>
       </div>
     </div>
     <div class="row p-3">
@@ -194,6 +197,10 @@
 
   .fa-user-plus {
     color: rgb(0, 158, 0);
+  }
+
+  .fa-user-edit {
+    color: rgb(185, 185, 0);
   }
 
   /* .board-desc {
