@@ -15,13 +15,29 @@
     </div>
 
     <div class="row">
-      <div class="col-10 offset-md-1">
+      <div class="col-8 offset-md-2 mt-3 pl-4">
         <h1 class="board-title">{{board.title}}</h1>
       </div>
-      <div class="col-1 float-right">
-        <i class="fas fa-user-plus mt-4" @click="showAddCollabForm = !showAddCollabForm" v-if="!showAddCollabForm"></i>
+      <div class="row">
+        <div class="col mt-3">
+          <img src="../assets/icons8-add-user-group-man-man-filled-30.png" alt="Add List Icon"
+            @click="showAddCollabForm = !showAddCollabForm" v-if="!showAddCollabForm" class="mt-3 mr-3">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mt-3">
+          <img src="../assets/icons8-compose-30.png" alt="Add List Icon" @click="showForm = !showForm" v-if="!showForm"
+            class="mt-3 mr-3">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col mt-3 add-list">
+          <img src="../assets/icons8-add-list-30.png" alt="Add List Icon" @click="showAddListForm = !showAddListForm"
+            v-if="!showAddListForm" class="mt-3">
+        </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-12">
         <form @submit.prevent="addSharedUser" v-show="showAddCollabForm">
@@ -37,11 +53,8 @@
     </div>
 
     <div class="row">
-      <div class="col-10 offset-md-1">
+      <div class="col-12">
         <h4 class="board-desc">{{board.description}}</h4>
-      </div>
-      <div class="col-1">
-        <i class="fas fa-user-edit" @click="showForm = !showForm" v-if="!showForm"></i>
       </div>
     </div>
 
@@ -57,15 +70,22 @@
         <button class="btn btn-secondary" @click="showForm = !showForm" v-if="showForm">Cancel Edit</button>
       </div>
     </div>
-    <div class="row p-3">
-      <div class="col">
-        <form @submit.prevent="addList">
-          <input type="text" v-model="title" placeholder="Enter list name here" required>
-          <button class="btn btn-secondary" type="submit">Enter New List</button>
+
+    <div class="row">
+      <div class="col-12">
+        <form @submit.prevent="addList" v-show="showAddListForm">
+          <input type="text" v-model="title" placeholder="Enter List Name" required class="text-center">
+          <button class="btn btn-success ml-1 mb-1" type="submit">Add List</button>
         </form>
       </div>
+      <div class="col-12">
+        <button class="btn btn-secondary" @click="showAddListForm = !showAddListForm"
+          v-if="showAddListForm">Cancel</button>
+      </div>
     </div>
+
     <hr />
+
     <div>
       <list v-for="list in lists" :key="list._id" :listData="list" />
     </div>
@@ -91,7 +111,8 @@
         boardTitle: "",
         boardDescription: "",
         userName: "",
-        showAddCollabForm: false
+        showAddCollabForm: false,
+        showAddListForm: false
       }
     },
     computed: {
@@ -151,14 +172,13 @@
 <style scoped>
   .board {
     font-family: 'Raleway', sans-serif;
-    background-image: url('../assets/whiteboard.jpg');
-    -webkit-background-size: contain;
-    -moz-background-size: contain;
-    -o-background-size: contain;
-    background-size: contain;
+    background-image: url('../assets/whiteboard-2.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
-    background-attachment: scroll;
-    height: 100vh;
+    background-repeat: no-repeat;
   }
 
   .boards-link {
@@ -170,7 +190,7 @@
     font-size: 1.3em;
     font-family: 'Kalam', cursive;
     font-weight: bold;
-    padding-top: .5rem
+    margin-top: .3rem
   }
 
   .brand-mid {
@@ -183,7 +203,7 @@
   .user-name {
     font-family: 'Kalam', cursive;
     font-weight: bold;
-    padding-top: .5rem;
+    margin-top: .5rem;
   }
 
   .board-title {
@@ -203,11 +223,15 @@
     color: rgb(185, 185, 0);
   }
 
-  /* .board-desc {
-    font-family: 'Raleway', cursive;
-  } */
-
   .btn {
-    padding: .1rem .3rem;
+    padding: .0rem .3rem;
+  }
+
+  img {
+    cursor: pointer;
+  }
+
+  .add-list {
+    color: blue;
   }
 </style>
