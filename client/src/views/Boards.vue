@@ -1,13 +1,12 @@
 <template>
   <div class="container-fluid boards">
     <div class="row">
-      <div class="col-4"></div>
-      <div class="col-4">
+      <div class="col-4 offset-md-4">
         <h1 class="brand">de<span class="brand-mid">Note</span>vator</h1>
       </div>
-      <div class="col-4">
-        <button class="btn btn-sm btn-danger float-right mt-1" @click="userLogOut">Log Out</button>
-        <span class="float-right mr-2 mt-2 user-name">@{{this.$store.state.user.name}} </span>
+      <div class="col-2 offset-md-2">
+        <span class="mr-2 user-name">@{{this.$store.state.user.name}} </span>
+        <button class="btn btn-sm btn-danger mt-1" @click="userLogOut">Log Out</button>
       </div>
     </div>
     <div class="row" v-show="showForm">
@@ -27,8 +26,6 @@
           v-else-if="showForm">Cancel</button>
       </div>
     </div>
-
-
     <div class="row">
       <div class="card-columns">
         <div class="container" v-for="board in boards" :key="board._id" @click="openBoard(board._id)">
@@ -53,11 +50,6 @@
         </div>
       </div>
     </div>
-
-
-
-
-
   </div>
 </template>
 
@@ -117,18 +109,12 @@
 
 <style>
   .boards {
-    background-image: url('https://cdn.wallpapersafari.com/27/2/neKuYV.jpg');
+    background-image: url('../assets/boards-bg-3.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* background-attachment: fixed; */
-    height: 100%;
-    width: 100%;
     font-family: 'Raleway', sans-serif;
-  }
-
-  .container-fluid {
-    height: 100vh;
   }
 
   .brand {
@@ -143,7 +129,7 @@
 
   .user-name {
     font-family: 'Kalam', cursive;
-    font-weight: bold
+    font-weight: bold;
   }
 
   .card-columns {

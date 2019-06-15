@@ -1,24 +1,30 @@
 <template>
   <drop @drop="handleDrop" class="drop">
-
+    <div class="row">
+      <div class="col">
+        <h4>{{listData.title}}</h4>
+      </div>
+    </div>
     <div>
-      {{listData.title}}
       <form v-show="showForm" @submit.prevent="editList">
-        <input type="text" placeholder="Edit Title" v-model="listTitle">
+        <input type="text" placeholder="Edit List Title" v-model="listTitle">
         <button type="submit" class="btn btn-success">Submit Changes</button>
       </form>
-      <button @click="showForm = !showForm" v-if="showForm == false" class="btn btn-warning">Edit List Name</button>
-      <button @click="showForm = !showForm" v-else="showForm == true" class="btn btn-warning">Cancel Edit</button>
+      <button @click="showForm = !showForm" v-if="!showForm" class="btn btn-secondary">Edit List Name</button>
+      <button @click="showForm = !showForm" v-else="showForm" class="btn btn-warning">Cancel Edit</button>
       <button type="button" @click="deleteList" class="btn btn-danger ml-1">Delete List</button>
     </div>
 
-
-    <task v-for="task in tasks" :key="task._id" :taskData="task" />
+    <div class="row">
+      <div class="col p-3">
+        <task v-for="task in tasks" :key="task._id" :taskData="task" />
+      </div>
+    </div>
 
     <div>
       <form @submit.prevent="addTask">
-        <input type="text" v-model="description" placeholder="Enter task here">
-        <button type="submit" class="btn btn-success">enter your task</button>
+        <input type="text" v-model="description" placeholder="Enter Note" required>
+        <button type="submit" class="btn btn-secondary">Add a note</button>
       </form>
     </div>
     <hr />
@@ -85,4 +91,12 @@
 </script>
 
 <style scoped>
+  .btn {
+    padding: .1rem .3rem;
+  }
+
+  /* list-bg {
+    background: transparent;
+    height: 100vh;
+  } */
 </style>

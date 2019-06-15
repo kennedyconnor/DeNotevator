@@ -60,7 +60,7 @@
   };
 </script>
 
-<style>
+<style scoped>
   .action {
     cursor: pointer;
   }

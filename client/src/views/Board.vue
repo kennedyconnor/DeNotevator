@@ -1,46 +1,43 @@
 <template>
-  <div class="board board-img container-fluid">
-    <div>
-      <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4">
-          <h2 class="brand">de<span class="brand-mid">Note</span>vator</h2>
-        </div>
-        <div class="col-4">
-          <button class="btn btn-primary float-right" @click="userLogOut">Log Out</button>
-          <span class="float-right">@{{this.$store.state.user.name}} </span>
-        </div>
-        <div class="col">
-          <router-link to="/"><button class="btn btn-secondary">Your Boards</button></router-link>
-        </div>
-      </div>
-    </div>
-    <hr />
-    <div class="row p-1">
-      <div class="col">
-        <h2>{{board.title}}</h2>
-      </div>
-    </div>
+  <div class="board container-fluid">
     <div class="row">
-      <div class="col">
-        <h4>{{board.description}}</h4>
+      <div class="col-5">
+        <h2 class="brand float-left">de<span class="brand-mid">Note</span>vator</h2>
+      </div>
+      <div class="col-5">
+        <router-link to="/"><a class="float-left ml-3 mt-1 text-dark">Boards Home</a>
+        </router-link>
+      </div>
+      <div class="col-2 offset-md-">
+        <span class="user-name mr-2">@{{this.$store.state.user.name}}</span>
+        <button class="btn btn-danger btn-sm mt-1" @click="userLogOut">Log Out</button>
       </div>
     </div>
+
+    <div class="row p-1">
+      <div class="col-12">
+        <h1 class="board-title">{{board.title}}</h1>
+      </div>
+      <div class="col-12">
+        <h4 class="board-desc">{{board.description}}</h4>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col">
         <form v-show="showForm" @submit.prevent="editBoard">
-          <input type="text" placeholder="Edit Title" v-model="boardTitle">
-          <input type="text" placeholder="Edit Description" v-model="boardDescription">
-          <button class="btn btn-secondary" type="submit">Submit Changes</button>
+          <input type="text" placeholder="Edit Board Title" v-model="boardTitle" class="text-center">
+          <input type="text" placeholder="Edit Board Description" v-model="boardDescription" class="text-center">
+          <button class="btn btn-success ml-1 mb-1" type="submit">Submit Changes</button>
         </form>
-        <button class="btn btn-secondary" @click="showForm = !showForm" v-if="!showForm">Edit Board Details</button>
+        <button class="btn btn-light" @click="showForm = !showForm" v-if="!showForm">Edit Board Details</button>
         <button class="btn btn-secondary" @click="showForm = !showForm" v-else="showForm">Cancel Edit</button>
       </div>
     </div>
     <div class="row p-3">
       <div class="col">
         <form @submit.prevent="addList">
-          <input type="text" v-model="title" placeholder="Enter list name here">
+          <input type="text" v-model="title" placeholder="Enter list name here" required>
           <button class="btn btn-secondary" type="submit">Enter New List</button>
         </form>
       </div>
@@ -129,31 +126,42 @@
 
 <style scoped>
   .board {
-    font-family: 'Indie Flower', cursive;
-  }
-
-  .board-img {
-    background-image: url('../assets/whiteboard.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    /* background-attachment: fixed; */
-    height: 100%;
-    width: 100%;
     font-family: 'Raleway', sans-serif;
+    background-image: url('../assets/whiteboard.jpg');
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    background-position: center;
+    background-attachment: scroll;
+    height: 100vh;
   }
 
   .brand {
-    font-size: 3em;
-    font-family: 'Permanent Marker', cursive;
-  }
-
-  .brand-mid {
     font-size: 1.3em;
     font-family: 'Permanent Marker', cursive;
   }
 
-  .container-fluid {
-    height: 100vh;
+  .brand-mid {
+    font-size: 1.2em;
+    font-family: 'Permanent Marker', cursive;
+  }
+
+  .user-name {
+    font-family: 'Kalam', cursive;
+    font-weight: bold
+  }
+
+  .board-title {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 3rem;
+  }
+
+  .board-desc {
+    font-family: 'Kalam', cursive;
+  }
+
+  .btn {
+    padding: .1rem .3rem;
   }
 </style>

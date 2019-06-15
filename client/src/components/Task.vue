@@ -2,31 +2,30 @@
   <drag :transfer-data="taskData" :effect-allowed="['move']" drop-effect="move" class="drag task">
     {{taskData.description}}
     <br>
-    <div class="dropdown">
-      <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">
-        Move Task
-      </button>
+    <!-- <div class="dropdown">
+      <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown">Move
+        Note </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         <p class="dropdown-item" @click="changeList(list._id)" v-for="list in lists"
           v-if="list._id !== taskData.listId">{{list.title}}</p>
       </div>
-    </div>
+    </div> -->
     <br>
     <form v-show="showForm" @submit.prevent="editTask">
       <input type="text" placeholder="Edit Description" v-model="taskDescription">
       <button type="submit" class="btn btn-success ml-1">Submit Changes</button>
     </form>
-    <button @click="showForm = !showForm" v-if="showForm == false" class="btn btn-warning">Edit Task</button>
+    <button @click="showForm = !showForm" v-if="showForm == false" class="btn btn-secondary">Edit Note</button>
     <button @click="showForm = !showForm" v-else="showForm == true" class="btn btn-warning">Cancel Edit</button>
 
-    <button type="button" @click="deleteTask" class="btn btn-danger ml-1">Delete Task</button>
+    <button type="button" @click="deleteTask" class="btn btn-danger ml-1">Delete Note</button>
     <p v-for="comment in taskData.comments">{{comment.content}} - {{comment.authorId.name}}
       <button type="button" @click="deleteComment(comment._id)" class="btn btn-info ml-1">Delete Comment</button>
     </p>
     <br>
     <form @submit.prevent="addComment">
       <input type="text" v-model="content" placeholder="Enter new comment here">
-      <button type="submit">enter your comment</button>
+      <button class="btn btn-secondary" type=" submit">Enter comment</button>
     </form>
   </drag>
 </template>
@@ -85,3 +84,9 @@
     }
   }
 </script>
+
+<style scoped>
+  .button {
+    padding: .1rem .3rem;
+  }
+</style>

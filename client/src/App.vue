@@ -14,7 +14,7 @@
   #app {
     text-align: center;
     padding: 0px 0px;
-    /* font-family: 'Permanent Marker', cursive; */
-
+    height: 100vh;
+    width: 100vw;
   }
 </style>
