@@ -1,33 +1,95 @@
 <template>
   <drop @drop="handleDrop" class="drop">
-    <div class="row">
+    <div class="card border-dark mb-3" style="max-width: 30rem;">
+      <div class="card-header text-center pt-4">
+        <div class="row">
+          <div class="col-12">
+            <h4><b>{{listData.title}}</b></h4>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-2 offset-md-3">
+            <img src="../assets/icons8-add-property-30.png" alt="Add Note" title="Add Note"
+              @click="showAddTaskForm = !showAddTaskForm" v-if="!showAddTaskForm">
+          </div>
+          <div class="col-2">
+            <img src="../assets/icons8-compose-30.png" alt="Edit List Icon" title="Edit List"
+              @click="showForm = !showForm" v-if="!showForm">
+          </div>
+          <div class="col-2">
+            <img src="../assets/icons8-trash-30.png" alt="Delete List" title="Delete List" @click="deleteList">
+            <!-- <button type="button" @click="deleteList" class="btn btn-danger ml-1">Delete List</button> -->
+          </div>
+        </div>
+      </div>
+      <div class="card-body text-dark">
+        <div class="row">
+          <div class="col">
+            <form v-show="showForm" @submit.prevent="editList">
+              <input type="text" placeholder="Edit List Title" v-model="listTitle" class="text-center">
+              <button type="submit" class="btn btn-sm btn-success mb-1 ml-1 py-1">Submit</button>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button @click="showForm = !showForm" v-if="showForm" class="btn btn-warning">Cancel Edit</button>
+            <!-- <button type="button" @click="deleteList" class="btn btn-danger ml-1">Delete List</button> -->
+
+          </div>
+
+        </div>
+        <!-- <button @click="showForm = !showForm" v-if="!showForm" class="btn btn-secondary">Edit List Name</button> -->
+        <div class="row">
+          <div class="col mt-2">
+            <form @submit.prevent="addTask" v-show="showAddTaskForm">
+              <input type="text" v-model="description" placeholder="Enter Your Note" required class="text-center">
+              <button type="submit" class="btn btn-success btn-sm mb-1 ml-1 py-1">Add Note</button>
+            </form>
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-sm btn-warning mb-2 mt-1" @click="showAddTaskForm = !showAddTaskForm"
+            v-if="showAddTaskForm">Cancel</button>
+        </div>
+
+
+        <div class="row">
+          <div class="col p-3">
+            <task v-for="task in tasks" :key="task._id" :taskData="task" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <div class="row">
       <div class="col">
         <h4>{{listData.title}}</h4>
+        <form v-show="showForm" @submit.prevent="editList">
+          <input type="text" placeholder="Edit List Title" v-model="listTitle">
+          <button type="submit" class="btn btn-success">Submit Changes</button>
+        </form>
+        <button @click="showForm = !showForm" v-if="!showForm" class="btn btn-secondary">Edit List Name</button>
+        <button @click="showForm = !showForm" v-else="showForm" class="btn btn-warning">Cancel Edit</button>
+        <button type="button" @click="deleteList" class="btn btn-danger ml-1">Delete List</button>
+        <div class="row">
+          <div class="col p-3">
+            <task v-for="task in tasks" :key="task._id" :taskData="task" />
+          </div>
+        </div>
       </div>
-    </div>
-    <div>
-      <form v-show="showForm" @submit.prevent="editList">
-        <input type="text" placeholder="Edit List Title" v-model="listTitle">
-        <button type="submit" class="btn btn-success">Submit Changes</button>
-      </form>
-      <button @click="showForm = !showForm" v-if="!showForm" class="btn btn-secondary">Edit List Name</button>
-      <button @click="showForm = !showForm" v-else="showForm" class="btn btn-warning">Cancel Edit</button>
-      <button type="button" @click="deleteList" class="btn btn-danger ml-1">Delete List</button>
-    </div>
+    </div> -->
 
-    <div class="row">
-      <div class="col p-3">
-        <task v-for="task in tasks" :key="task._id" :taskData="task" />
-      </div>
-    </div>
 
-    <div>
+    <!-- <div>
       <form @submit.prevent="addTask">
         <input type="text" v-model="description" placeholder="Enter Note" required>
         <button type="submit" class="btn btn-secondary">Add a note</button>
       </form>
-    </div>
-    <hr />
+    </div> -->
+
   </drop>
 </template>
 
@@ -45,7 +107,8 @@
       return {
         description: "",
         listTitle: "",
-        showForm: false
+        showForm: false,
+        showAddTaskForm: false
       }
     },
     computed: {
@@ -93,6 +156,29 @@
 <style scoped>
   .btn {
     padding: .1rem .3rem;
+  }
+
+  .card {
+    background: transparent;
+    border-width: 3px;
+  }
+
+  .card-header {
+    background: transparent;
+    font-family: 'Kalam', cursive;
+
+  }
+
+  .card-body {
+    background: transparent;
+  }
+
+  .card-text {
+    background: transparent;
+  }
+
+  img {
+    cursor: pointer;
   }
 
   /* list-bg {
