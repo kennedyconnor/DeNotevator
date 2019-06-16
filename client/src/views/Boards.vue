@@ -39,12 +39,13 @@
             </div>
           </div>
         </div>
-        <div class="container" v-for="board in sharedBoards" :key="board._id" @click="openBoard(board._id)">
+        <div class="container" v-for="board in sharedBoards" :key="board._id">
           <img :src="getRandomImg()" alt="Demotivator Image" class="image">
           <div class="middle">
             <div class="text">
-              <h5><b>{{board.title}}</b><i class="fas fa-users"></i></h5>
-              <p>{{board.description}}</p>
+              <h5 @click="openBoard(board._id)" class="open-bug"><b>{{board.title}}</b><i class="fas fa-users ml-1"></i>
+              </h5>
+              <p @click="openBoard(board._id)" class="open-bug">{{board.description}}</p>
               <button type="button" class="btn btn-sm btn-danger" @click="deleteBoard(board._id)">Delete</button>
             </div>
           </div>
@@ -110,7 +111,7 @@
 
 <style>
   .boards {
-    background-image: url('../assets/boards-bg-3.jpg');
+    background-image: url('../assets/boards-bg-4.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
