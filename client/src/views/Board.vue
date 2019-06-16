@@ -186,6 +186,10 @@
     font-family: 'Kalam', cursive;
   }
 
+  .router-link:hover {
+    color: blue;
+  }
+
   .brand {
     font-size: 1.3em;
     font-family: 'Kalam', cursive;

@@ -1,6 +1,5 @@
 <template>
   <drag :transfer-data="taskData" :effect-allowed="['move']" drop-effect="move" class="drag task">
-
     <div class="card border-dark mb-3 justify-content-center" style="max-width: 25rem;">
       <div class="card-header">
         <div class="row">
@@ -20,7 +19,6 @@
           </div>
         </div>
       </div>
-
       <div class="card-body text-dark">
         <div class="row">
           <div class="col-12">
@@ -51,31 +49,8 @@
 
           </div>
         </div>
-
       </div>
-
-
     </div>
-
-
-
-
-    <!-- {{taskData.description}}
-    <form v-show="showForm" @submit.prevent="editTask">
-      <input type="text" placeholder="Edit Description" v-model="taskDescription">
-      <button type="submit" class="btn btn-success ml-1">Submit Changes</button>
-    </form>
-    <button @click="showForm = !showForm" v-if="showForm == false" class="btn btn-secondary">Edit Note</button>
-    <button @click="showForm = !showForm" v-else="showForm == true" class="btn btn-warning">Cancel Edit</button>
-
-    <button type="button" @click="deleteTask" class="btn btn-danger ml-1">Delete Note</button> -->
-    <!-- <div v-for="comment in taskData.comments">{{comment.content}} - {{comment.authorId.name}}
-      <button type="button" @click="deleteComment(comment._id)" class="btn btn-info ml-1">Delete Comment</button>
-    </div> -->
-    <!-- <form @submit.prevent="addComment">
-      <input type="text" v-model="content" placeholder="Your Comment">
-      <button class="btn btn-secondary" type="submit">Add Comment</button>
-    </form> -->
   </drag>
 </template>
 

@@ -5,7 +5,6 @@ import router from './router'
 
 Vue.use(Vuex)
 
-//Allows axios to work locally or live
 let base = window.location.host.includes('localhost:8080') ? '//localhost:3000/' : '/'
 
 let auth = Axios.create({
@@ -25,11 +24,8 @@ export default new Vuex.Store({
     user: {},
     boards: [],
     sharedBoards: [],
-    //activeBoard: {},
     lists: [],
-    //activeList: {},
     tasks: {},
-    //activeTask: {},
     comments: []
   },
   mutations: {
@@ -42,21 +38,12 @@ export default new Vuex.Store({
     setSharedBoards(state, sharedBoards) {
       state.sharedBoards = sharedBoards
     },
-    // setActiveBoard(state, activeBoard) {
-    //   state.activeBoard = activeBoard
-    // },
     setLists(state, lists) {
       state.lists = lists
     },
-    // setActiveList(state, activeList) {
-    //   state.activeList = activeList
-    // },
     setTasks(state, tasks) {
       Vue.set(state.tasks, tasks.listId, tasks.results)
     },
-    // setActiveTask(state, activeTask) {
-    //   state.activeTask = activeTask
-    // },
     setComments(state, comments) {
       state.comments = comments
     }
@@ -97,8 +84,10 @@ export default new Vuex.Store({
     },
 
     async getUserByName({ commit, dispatch }, name) {
-      let res = await auth.get('', name)
-      return res.data
+      try {
+        let res = await auth.get('', name)
+        return res.data
+      } catch (error) { console.error(error) }
     },
     //#endregion
 
@@ -107,7 +96,6 @@ export default new Vuex.Store({
     getBoards({ commit, dispatch }) {
       api.get('boards')
         .then(res => {
-          console.log('Getting all boards', res.data)
           // res.data.forEach(i => Math.floor(Math.random(i) * images.length))
           commit('setBoards', res.data)
         })
@@ -115,15 +103,13 @@ export default new Vuex.Store({
     async getSharedBoards({ commit, dispatch }) {
       try {
         let res = await api.get('boards/shared')
-        console.log('getting shared boards', res.data)
         commit('setSharedBoards', res.data)
       } catch (error) { console.error(error) }
     },
-    
+
     async getBoardById({ commit, dispatch }, boardId) {
       try {
         let res = await api.get('boards/' + boardId)
-        console.log('Getting board by ID', res.data)
         commit('setActiveBoard', res.data)
       } catch (error) { console.error(error) }
     },
@@ -153,7 +139,6 @@ export default new Vuex.Store({
     async getLists({ commit, dispatch }, boardId) {
       try {
         let res = await api.get('boards/' + boardId + '/lists')
-        console.log('Getting board lists', res.data)
         commit('setLists', res.data)
       } catch (error) { console.error(error) }
     },
@@ -184,9 +169,7 @@ export default new Vuex.Store({
       try {
         let res = await api.get('lists/' + listId + '/tasks')
         commit('setTasks', { listId: listId, results: res.data })
-      } catch (error) {
-        console.error(error)
-      }
+      } catch (error) { console.error(error) }
     },
     async addTask({ commit, dispatch }, newTask) {
       try {
