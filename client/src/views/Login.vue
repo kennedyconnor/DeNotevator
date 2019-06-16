@@ -1,7 +1,6 @@
 <template>
   <div class="container-fluid login login-bg">
     <div class="row login-row">
-
       <div class="col-5">
         <div class="card">
           <img class="card-img" src="../assets/Post-it.png" alt="Card image">
