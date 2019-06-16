@@ -28,12 +28,13 @@
     </div>
     <div class="row">
       <div class="card-columns">
-        <div class="container" v-for="board in boards" :key="board._id" @click="openBoard(board._id)">
+        <div class="container" v-for="board in boards" :key="board._id">
           <img :src="getRandomImg()" alt="Demotivator Image" class="image">
           <div class="middle">
             <div class="text">
-              <h5><b>{{board.title}}</b></h5>
-              <p>{{board.description}}</p>
+
+              <h5 @click="openBoard(board._id)" class="open-bug"><b>{{board.title}}</b></h5>
+              <p @click="openBoard(board._id)" class="open-bug">{{board.description}}</p>
               <button type="button" class="btn btn-sm btn-danger" @click="deleteBoard(board._id)">Delete</button>
             </div>
           </div>
@@ -113,7 +114,10 @@
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    min-width: 100%;
+    min-height: 100%;
     font-family: 'Raleway', sans-serif;
   }
 
@@ -187,6 +191,14 @@
     font-size: 20px;
     background-size: cover;
     /* padding: 16px 32px; */
+  }
+
+  .open-bug {
+    cursor: pointer;
+  }
+
+  .open-bug:hover {
+    color: blue;
   }
 </style>
 

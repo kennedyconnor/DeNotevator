@@ -6,20 +6,18 @@
           <div class="col-12">
             <h4><b>{{listData.title}}</b></h4>
           </div>
-
         </div>
         <div class="row">
-          <div class="col-2 offset-md-3">
-            <img src="../assets/icons8-add-property-30.png" alt="Add Note" title="Add Note"
+          <div class="col-1 offset-md-4">
+            <img src="../assets/icons8-add-property-20.png" alt="Add Note" title="Add Note"
               @click="showAddTaskForm = !showAddTaskForm" v-if="!showAddTaskForm">
           </div>
-          <div class="col-2">
-            <img src="../assets/icons8-compose-30.png" alt="Edit List Icon" title="Edit List"
+          <div class="col-1">
+            <img src="../assets/icons8-compose-20.png" alt="Edit List Icon" title="Edit List"
               @click="showForm = !showForm" v-if="!showForm">
           </div>
-          <div class="col-2">
-            <img src="../assets/icons8-trash-30.png" alt="Delete List" title="Delete List" @click="deleteList">
-            <!-- <button type="button" @click="deleteList" class="btn btn-danger ml-1">Delete List</button> -->
+          <div class="col-1">
+            <img src="../assets/icons8-trash-20.png" alt="Delete List" title="Delete List" @click="deleteList">
           </div>
         </div>
       </div>
@@ -35,12 +33,8 @@
         <div class="row">
           <div class="col">
             <button @click="showForm = !showForm" v-if="showForm" class="btn btn-warning">Cancel Edit</button>
-            <!-- <button type="button" @click="deleteList" class="btn btn-danger ml-1">Delete List</button> -->
-
           </div>
-
         </div>
-        <!-- <button @click="showForm = !showForm" v-if="!showForm" class="btn btn-secondary">Edit List Name</button> -->
         <div class="row">
           <div class="col mt-2">
             <form @submit.prevent="addTask" v-show="showAddTaskForm">
@@ -48,17 +42,13 @@
               <button type="submit" class="btn btn-success btn-sm mb-1 ml-1 py-1">Add Note</button>
             </form>
           </div>
-        </div>
-        <div>
-          <button class="btn btn-sm btn-warning mb-2 mt-1" @click="showAddTaskForm = !showAddTaskForm"
-            v-if="showAddTaskForm">Cancel</button>
-        </div>
-
-
-        <div class="row">
-          <div class="col p-3">
-            <task v-for="task in tasks" :key="task._id" :taskData="task" />
+          <div class="col-12">
+            <button class="btn btn-sm btn-warning mb-2 mt-1" @click="showAddTaskForm = !showAddTaskForm"
+              v-if="showAddTaskForm">Cancel</button>
           </div>
+        </div>
+        <div class="row">
+          <task class="col-12" v-for="task in tasks" :key="task._id" :taskData="task" />
         </div>
       </div>
     </div>

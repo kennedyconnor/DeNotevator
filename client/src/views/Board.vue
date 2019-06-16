@@ -47,8 +47,7 @@
         </form>
       </div>
       <div class="col-12">
-        <button @click="showAddCollabForm = !showAddCollabForm" v-if="showAddCollabForm"
-          class="btn btn-sm btn-secondary">
+        <button @click="showAddCollabForm = !showAddCollabForm" v-if="showAddCollabForm" class="btn btn-sm btn-warning">
           Cancel</button>
       </div>
     </div>
@@ -68,7 +67,7 @@
         </form>
       </div>
       <div class="col-12">
-        <button class="btn btn-secondary mt-1" @click="showForm = !showForm" v-if="showForm">Cancel Edit</button>
+        <button class="btn btn-warning mt-1" @click="showForm = !showForm" v-if="showForm">Cancel Edit</button>
       </div>
     </div>
 
@@ -80,16 +79,13 @@
         </form>
       </div>
       <div class="col-12">
-        <button class="btn btn-secondary" @click="showAddListForm = !showAddListForm"
+        <button class="btn btn-warning" @click="showAddListForm = !showAddListForm"
           v-if="showAddListForm">Cancel</button>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-4 mt-3">
-        <list v-for="list in lists" :key="list._id" :listData="list" />
-      </div>
-
+      <list class="col-4" v-for="list in lists" :key="list._id" :listData="list" />
     </div>
   </div>
 </template>
@@ -180,7 +176,9 @@
     -o-background-size: cover;
     background-size: 100% 100%;
     background-position: center;
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat; */
+    min-width: 100vw;
+    min-height: 100%;
   }
 
   .boards-link {
