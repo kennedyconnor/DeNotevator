@@ -10,7 +10,7 @@
       </div>
       <div class="col-2">
         <button class="btn btn-danger btn-sm mt-1 float-right" @click="userLogOut">Log Out</button>
-        <span class="user-name mr-2 float-right">@{{this.$store.state.user.name}}</span>
+        <span class="user-name mr-2 float-right">Owner: @{{this.$store.state.user.name}}</span>
       </div>
     </div>
 
