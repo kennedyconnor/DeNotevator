@@ -85,7 +85,6 @@ export default new Vuex.Store({
 
     async getUserByName({ commit, dispatch }, payload) {
       try {
-        debugger
         let res = await auth.get(payload.name)
         payload.sharedIds.push(res.data[0]._id)
         dispatch('editBoard', payload)
