@@ -83,10 +83,12 @@ export default new Vuex.Store({
       router.push({ name: 'login' })
     },
 
-    async getUserByName({ commit, dispatch }, name) {
+    async getUserByName({ commit, dispatch }, payload) {
       try {
-        let res = await auth.get('', name)
-        return res.data
+        debugger
+        let res = await auth.get(payload.name)
+        payload.sharedIds.push(res.data[0]._id)
+        dispatch('editBoard', payload)
       } catch (error) { console.error(error) }
     },
     //#endregion
@@ -128,6 +130,7 @@ export default new Vuex.Store({
     },
 
     async editBoard({ commit, dispatch }, payload) {
+      // debugger
       try {
         await api.put('boards/' + payload._id, payload)
         dispatch('getBoards')
