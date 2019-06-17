@@ -15,7 +15,7 @@
               @click="showForm = !showForm" v-if="!showForm">
           </div>
           <div class="col-1">
-            <img src="../assets/icons8-trash-20.png" alt="Delete Task" title="Delete Task" @click="deleteTask">
+            <img src="../assets/icons8-trash-20.png" alt="Delete Note" title="Delete Note" @click="deleteTask">
           </div>
         </div>
       </div>
