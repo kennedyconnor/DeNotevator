@@ -155,12 +155,14 @@
         this.$store.dispatch('logout')
       },
       addSharedUser() {
-        let sharedUser = this.$store.dispatch('getUserByName', this.userName)
+
         let sharedBoard = {
+          name: this.userName,
           _id: this.board._id,
-          sharedIds: this.board.sharedIds.push(sharedUser._id)
+          sharedIds: this.board.sharedIds
         }
-        this.$store.dispatch('editBoard', sharedBoards)
+        this.$store.dispatch('getUserByName', sharedBoard)
+
         this.userName = ""
       }
     }
