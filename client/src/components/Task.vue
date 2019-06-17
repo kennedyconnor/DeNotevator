@@ -79,15 +79,17 @@
       addComment() {
         let newComment = {
           content: this.content,
-          authorId: this.taskData.authorId,
+          authorId: this.$store.state.user._id,
         }
         this.taskData.comments.push(newComment)
         this.$store.dispatch('editTask', this.taskData)
         this.content = ''
       },
       deleteComment(id) {
+
         this.taskData.comments = this.taskData.comments.filter(comment => comment._id !== id)
         this.$store.dispatch('editTask', this.taskData)
+
       },
       editTask() {
         if (this.taskDescription) {
