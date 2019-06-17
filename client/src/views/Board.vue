@@ -5,7 +5,7 @@
         <h2 class="brand float-left">de<span class="brand-mid">Note</span>vator</h2>
       </div>
       <div class="col-5">
-        <router-link to="/"><a class="float-left ml-3 mt-1 text-dark boards-link"><b>Boards Home</b></a>
+        <router-link to="/"><a class="float-left ml-5 mt-1 text-dark boards-link"><b>Boards Home</b></a>
         </router-link>
       </div>
       <div class="col-2">
