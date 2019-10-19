@@ -77,7 +77,7 @@
   }
 
   .login-bg {
-    background-image: url("../assets/login-2.jpg");
+    background-image: url("../assets/deskbg.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
