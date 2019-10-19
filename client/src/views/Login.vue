@@ -12,6 +12,7 @@
                 class="text-center mt-1 login-inputs">
               <br>
               <button type="submit" class="btn btn-success mt-1">Login</button>
+              <button type="button" @click="demoLogin()" class="btn btn-primary mt-1">Demo</button>
             </form>
             <form v-else @submit.prevent="register">
               <input type="text" v-model="newUser.name" placeholder="Name" class="text-center">
@@ -45,6 +46,10 @@
           email: "",
           password: "",
           name: ""
+        },
+        demoUser: {
+          email: "demoUser@test.com",
+          password: "password"
         }
       };
     },
@@ -54,6 +59,9 @@
       },
       loginUser() {
         this.$store.dispatch("login", this.creds);
+      },
+      demoLogin() {
+        this.$store.dispatch("login", this.demoUser)
       }
     }
   };
