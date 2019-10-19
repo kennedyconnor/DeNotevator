@@ -1,9 +1,9 @@
 <template>
   <div class="container-fluid login login-bg">
     <div class="row login-row">
-      <div class="col-5">
+      <div class="col login-col">
         <div class="card">
-          <img class="card-img" src="../assets/Post-it.png" alt="Card image">
+
           <div class="card-img-overlay">
             <h5 class="card-title"><b>Login</b></h5>
             <form v-if="loginForm" @submit.prevent="loginUser" class="text-center">
@@ -85,9 +85,14 @@
     width: 100%;
   }
 
+  .login-col {
+    align-content: center;
+  }
+
+
   .login-row {
     height: 100vh;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
   }
 
@@ -97,25 +102,20 @@
   }
 
   .login-inputs {
-    max-width: 100%;
+    /* max-width: 100%; */
   }
 
   .card-img {
     height: 38vh;
   }
 
-  .card-img-overlay {
-    margin-left: 10px;
-    margin-right: 15px;
-    margin-top: 8px;
-  }
+
 
   .card {
-    margin-left: 12vw;
-    margin-right: 2vw;
-    margin-top: 30vh;
-    border: none;
-    height: 38vh;
-    background-color: transparent;
+    border: 1px 1px black;
+    height: 28vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 25vh;
+    justify-content: center;
   }
 </style>
