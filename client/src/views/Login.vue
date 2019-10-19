@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid login login-bg">
     <div class="row login-row">
-      <div class="col login-col">
+      <div class="col-4 offset-5 login-col">
         <div class="card">
 
           <div class="card-img-overlay">
@@ -85,31 +85,24 @@
     width: 100%;
   }
 
-  .login-col {
-    align-content: center;
-  }
+
 
 
   .login-row {
     height: 100vh;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
   }
 
-  .login-btn {
+  /* .login-btn {
     margin-left: 75px;
-    margin-top: 5px
-  }
+    margin-top: 5px;
+    margin-right: 5px
+  } */
 
   .login-inputs {
     /* max-width: 100%; */
   }
-
-  .card-img {
-    height: 38vh;
-  }
-
-
 
   .card {
     border: 1px 1px black;
