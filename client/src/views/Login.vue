@@ -50,7 +50,6 @@
     },
     methods: {
       register() {
-        debugger
         this.$store.dispatch("register", this.newUser);
       },
       loginUser() {

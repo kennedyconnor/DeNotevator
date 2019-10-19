@@ -29,7 +29,7 @@
     <div class="row">
       <div class="card-columns">
         <div class="container" v-for="board in boards" :key="board._id">
-          <img :src="getRandomImg()" alt="Demotivator Image" class="image">
+          <img :src="board.img" alt="Demotivator Image" class="image">
           <div class="middle">
             <div class="text">
 
@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="container" v-for="board in sharedBoards" :key="board._id">
-          <img :src="getRandomImg()" alt="Demotivator Image" class="image">
+          <img :src="board.img" alt="Demotivator Image" class="image">
           <div class="middle">
             <div class="text">
               <h5 @click="openBoard(board._id)" class="open-bug"><b>{{board.title}}</b><i class="fas fa-users ml-1"></i>
@@ -66,10 +66,10 @@
       return {
         newBoard: {
           title: "",
-          description: ""
+          description: "",
+          img: ""
         },
         showForm: false,
-        // images: ['1.jpeg', '2.jpeg', '3.jpeg', '4.jpeg', '5.jpeg', '6.jpg', '7.jpeg', '8.jpg', '9.jpeg', '10.jpg', '11.jpeg', '12.jpeg', '13.jpg', '14.jpg', '15.jpg', '16.jpg', '17.jpg', '18.jpeg', '19.jpg']
       };
     },
     created() {
@@ -88,6 +88,7 @@
     },
     methods: {
       addBoard() {
+        this.newBoard.img = this.getRandomImg();
         this.$store.dispatch("addBoard", this.newBoard);
         this.newBoard = { title: "", description: "" };
       },
